@@ -42,10 +42,10 @@
                         <!-- Authentication Links -->
                         @if(!key_exists('email',session()->all()))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('logar') }}">{{ __('logar') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('registro') }}">{{ __('registro') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">

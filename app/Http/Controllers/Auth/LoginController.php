@@ -58,7 +58,7 @@ class LoginController extends Controller
             session ( [
                 'email' => $crendentials['email']
             ] );
-            return view('home');
+            return redirect()->back();
         } else {
             return back()->withErrors([
                 'email' => 'email ou senha errados'

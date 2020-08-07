@@ -71,8 +71,8 @@
                     @if(key_exists('email',session()->all()))
                     <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('logar') }}">Login</a>
+                        <a href="{{ route('registro') }}">Register</a>
                     @endif
                 </div>
             @endif

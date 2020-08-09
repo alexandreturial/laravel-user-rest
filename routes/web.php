@@ -28,10 +28,14 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 $this->group(['prefix' => '/usuario'], function() {
     $this->group(['middleware' => 'login'], function() {
         $this->get('/home', 'Auth\LoginController@showLoginForm')->name('home');
+        $this->get('/perfil', 'UserController@index')->name('perfil');
+        $this->post('/update/{id?}', 'UserController@update')->name('update');
+
     });
-    $this->get('/validade','UsuarioController@validar')->name('validade');
-    $this->get('/validacao/email/{id?}', 'UsuarioController@verificacao');
-    $this->post('/recuperasenha', 'Auth\LoginController@newPassword')->name('recuperasenha');
+    // $this->get('/validade','UsuarioController@validar')->name('validade');
+    // $this->get('/validacao/email/{id?}', 'UsuarioController@verificacao');
+    // $this->post('/recuperasenha', 'Auth\LoginController@newPassword')->name('recuperasenha');
+    
     $this->get('/esquecisenha', function () {
         return view('auth.passwords.email');
     })->name('senha');

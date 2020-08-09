@@ -19,9 +19,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
+      
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -57,21 +59,24 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}">
                                       logout
                                     </a>
-
-                                    {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                        {{--@csrf--}}
-                                    {{--</form>--}}
+                                    <a class="dropdown-item" href="{{ route('perfil') }}">
+                                        Perfil
+                                      </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                         @endif
                     </ul>
                 </div>
             </div>
-        </nav>
-
+        </nav> 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
+
+
 </html>

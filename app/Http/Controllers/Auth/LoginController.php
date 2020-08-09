@@ -20,6 +20,9 @@ class LoginController extends Controller
         $this->middleware('guest', ['only'=> 'showLoginForm']);
     }
 
+   
+
+
     public function showLoginForm(){
         if(key_exists('email',session()->all())){
             return view('home');
@@ -56,7 +59,8 @@ class LoginController extends Controller
         ) )) {
             session()->flush(); // Removes a specific variable
             session ( [
-                'email' => $crendentials['email']
+                'email' => $crendentials['email'],
+                'id' => $company->id
             ] );
             return redirect()->back();
         } else {

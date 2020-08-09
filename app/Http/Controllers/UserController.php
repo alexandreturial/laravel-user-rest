@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -19,7 +20,6 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|',
         ]);
     }
-
 
     /**
      * Display a listing of the resource.
@@ -89,20 +89,25 @@ class UserController extends Controller
        
         $crendentials = $this->validate(request(),[
             'id' => 'required|int|exists:TB_USUARIO,id',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|email:rfc,dns',
-            'password' => '|string|max:255|nullable|confirmed|min:6',
+            'DS_NOME' => 'required|string|max:255',
+            'DS_EMAIL' => 'required|string|email|max:255|email:rfc,dns',
+            'DS_SENHA' => 'string|max:255|nullable|confirmed|min:6',
             
         ]);
-        $credentials = array_filter( $crendentials);
-       
-        User::Where('id',$crendentials['id'])->update([
-            'DS_NOME' =>$crendentials['name']
-           ,'DS_EMAIL' =>$crendentials['email']
+      
+        $credentials = array_filter($crendentials);
         
-        ]);
-       
+        if(array_key_exists('DS_SENHA', $credentials)){
+           
+            $credentials['DS_SENHA'] = Hash::make($credentials['DS_SENHA']);
+            
+        }
         
+        try{
+            User::Where('id',$crendentials['id'])->update($credentials);
+        }catch(\Exception $e){
+            return 'Não foi possível atualizar o usuário';
+        }
         return redirect()->route('perfil');
     }
 
